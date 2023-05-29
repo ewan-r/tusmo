@@ -1,6 +1,6 @@
 <?php
-require_once ('/var/www/html/projet_web/app/Model.php');
-require_once ('/var/www/html/projet_web/app/Controller.php');
+require_once 'app/Model.php';
+require_once 'app/Controller.php';
 // define('ROOT', 'var/www/html/projet_web/');
 // echo ROOT;
 

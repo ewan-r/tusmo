@@ -1,5 +1,20 @@
+<?php 
+session_start();
+if (isset($_SESSION['errors'])){
+    echo '<ul>';
+    foreach($_SESSION['errors'] as $error){
+        echo '<li>' . $error . '</li>';
+    }
+    echo '</ul>';
+}
+if (isset($_POST['pseudo'])&& isset($_POST['password'])){
+    $connexions= new Connexions();
+    $connexions->connexion_post();
+}
+?>
+
 <h1> Connexion </h1>
-<form action="connexion.php" method="post">
+<form action="index.php?p=connexions" method="post">
     <label for="pseudo">Pseudo</label>
     <input type="text" name="pseudo" id="pseudo" required>
     <br>

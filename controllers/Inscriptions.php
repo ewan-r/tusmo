@@ -1,13 +1,19 @@
 <?php
-require_once("../models/Inscription.php");
+require_once("C:\\xampp\htdocs\\tusmo\models\Inscription.php");
 
 class Inscriptions extends Controller{
+
+    //déclare une variable inscription qui est un objet de la classe Inscription
+    private $inscription;
+
     public function __construct(){
-        $this->loadModel("Inscription");
+        $this->inscription = new Inscription();
     }
 
-    public function inscription(){
-        $this->render("inscription");
+    public function index(){
+        $inscription = "";
+        $this->loadModel("Inscription");
+        $this->render('index', ['inscription' => $inscription]);
     }
 
     public function inscription_post(){
@@ -22,11 +28,11 @@ class Inscriptions extends Controller{
             $errors['empty'] = "Tous les champs n'ont pas été remplis";
         }
 
-        if($this->Inscription->findByPseudo($pseudo)){
+        if($this->inscription->findByPseudo($pseudo)){
             $errors['pseudo'] = "Ce pseudo est déjà pris";
         }
 
-        if($this->Inscription->findByEmail($email)){
+        if($this->inscription->findByEmail($email)){
             $errors['email'] = "Cet email est déjà utilisé pour un autre compte";
         }
 
@@ -40,9 +46,10 @@ class Inscriptions extends Controller{
             header('Location: inscription');
         }else{
             $password = hash('sha256', $password);
-            $this->Inscription->insert($pseudo, $email, $password);
+            $this->inscription->insert($pseudo, $email, $password);
             $_SESSION['success'] = 1;
-            header('Location: connexion');
+            $_SESSION['pseudo'] = $pseudo;
+            header('Location: index.php?p=accueils');
         }
     }
 }

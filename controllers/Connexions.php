@@ -1,10 +1,17 @@
 <?php
 //session_start();
-require_once ('/var/www/html/projet_web/models/Connexion.php');  
+require_once ('C:\\xampp\htdocs\\tusmo\models\Connexion.php');  
 
 class Connexions extends Controller{
 
+    private $connexions;
+
+    public function __construct(){
+        $this->connexions = new Connexion();
+    }
+
     public function index(){
+        $connexions = "";
         $this->loadModel('Connexion');
         $this->render('index', ['connexions' => $connexions]);
     }
@@ -25,14 +32,16 @@ class Connexions extends Controller{
             header('Location: connexion');
         }else{
             $password = hash('sha256', $password);
-            if($this->Connexion->findByPseudo($pseudo)){
+            if($this->connexions->findByPseudo($pseudo)){
                 $errors['pseudo'] = "Ce pseudo n'existe pas";
             }
     
-            if($this->Connexion->findByPassword($password)){
+            if($this->connexions->findByPassword($password)){
                 $errors['password'] = "Ce mot de passe n'existe pas";
             }
             $_SESSION['success'] = 1;
+            $_SESSION['pseudo'] = $pseudo;
+            header("Location: index.php?p=accueils");
         }
     }
 }
