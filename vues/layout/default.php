@@ -10,6 +10,21 @@
         <h1>tusmo</h1>
     </header>
     <body>
+    <div class=bandeau>
+        <nav>
+            <ul>
+                <li><a href="index.php?p=accueils">Accueil</a></li>
+                <li><a href="index.php?p=mots">Mots</a></li>
+                <?php if(isset($_SESSION['success'])){
+                    echo "<li><a href='index.php?p=profils'>Profil</a></li>";
+                    echo "<li><a href='index.php?p=deconnexions'>Déconnexion</a></li>";
+                }
+                else{
+                    echo "<li><a href='index.php?p=connexions'>Connexion</a></li>";
+                }?>
+            </ul>
+        </nav>
+    </div>
     <div class="containers">
         <main>
             <?= $content; ?>

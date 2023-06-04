@@ -1,6 +1,6 @@
 <?php
 
-class Mot extends Models{
+class Mot extends Model{
     public function __construct(){
         $this->table = 'word';
         $this->getConnection();
@@ -8,11 +8,11 @@ class Mot extends Models{
 
      public function selectByDifficulty(int $difficulty){
          $words = [];
-         $sql = "SELECT * FROM {$this->table} WHERE difficulty = '" . $difficulty . " ans id = '";
+         $sql = "SELECT * FROM {$this->table} WHERE difficulte <= '" . $difficulty . "'";
          $query = $this->_connexion->prepare($sql);
          $query->execute();
          while ($row= $query->fetch(PDO::FETCH_ASSOC)){
-         $words[] = $row;
+         $words[] = $row['word'];
          }
          return $words;
      }

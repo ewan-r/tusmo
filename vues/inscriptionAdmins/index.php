@@ -7,7 +7,7 @@
         echo '</ul>';
     }
     if (isset($_POST['pseudo'])&& isset($_POST['email'])&& isset($_POST['password'])&& isset($_POST['password_confirm'])){
-        $inscriptions= new Inscriptions();
+        $inscriptions= new InscriptionAdmins();
         $inscriptions->inscription_post();
     }
 
@@ -16,7 +16,7 @@
 
 
 <h1> Inscription </h1>
-<form action="index.php?p=inscriptions" method="post">
+<form action="index.php?p=inscriptionAdmins" method="post">
     <label for="pseudo">Pseudo</label>
     <input type="text" name="pseudo" id="pseudo" required>
     <br>

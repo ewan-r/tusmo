@@ -1,5 +1,5 @@
 <?php
-require_once("C:\\xampp\htdocs\\tusmo\models\Accueil.php");
+require_once("models\Accueil.php");
 
 Class Accueils extends Controller{
     public function index(){

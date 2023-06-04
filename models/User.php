@@ -2,7 +2,7 @@
 
 class User extends Model{
 
-    private $id;
+    
     private $pseudo;
     private $email;
     private $level;
@@ -28,11 +28,18 @@ class User extends Model{
         $sql = "SELECT * FROM {$this->table} WHERE pseudo = '" . $pseudo . "'";
         $query = $this->_connexion->prepare($sql);
         $query->execute();
-        $row = $query->setFetchMode(PDO::FETCH_CLASS, 'User');
-        $this->id = $row->id;
-        $this->pseudo = $row->pseudo;
-        $this->email = $row->email;
-        $this->level = $row->level;
+        $row = $query->fetch(PDO::FETCH_ASSOC);
+        $this->pseudo = $row['pseudo'];
+        $this->email = $row['email'];
+        $this->level = $row['level'];
+    }
+
+    public function updateLevel(string $pseudo){
+        $this->findByPseudo($pseudo);
+        $level = $this->level + 1;
+        $sql = "UPDATE {$this->table} SET level = '" . $level . "' WHERE pseudo = '" . $pseudo . "'";
+        $query = $this->_connexion->prepare($sql);
+        $query->execute();
     }
 
 

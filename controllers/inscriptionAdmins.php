@@ -1,19 +1,18 @@
 <?php
-require_once("models\Inscription.php");
+require_once("models\inscriptionAdmin.php");
 
-class Inscriptions extends Controller{
+class InscriptionAdmins extends Controller{
 
-    //déclare une variable inscription qui est un objet de la classe Inscription
-    private $inscription;
+    public $inscriptionAdmin;
 
     public function __construct(){
-        $this->inscription = new Inscription();
+        $this->inscriptionAdmin = new InscriptionAdmin();
     }
 
     public function index(){
-        $inscription = "";
-        $this->loadModel("Inscription");
-        $this->render('index', ['inscription' => $inscription]);
+        $inscriptionAdmin = "";
+        $this->loadModel("inscriptionAdmin");
+        $this->render('index', ['inscriptionAdmin' => $inscriptionAdmin]);
     }
 
     public function inscription_post(){
@@ -28,11 +27,11 @@ class Inscriptions extends Controller{
             $errors['empty'] = "Tous les champs n'ont pas été remplis";
         }
 
-        if($this->inscription->findByPseudo($pseudo)){
+        if($this->inscriptionAdmin->findByPseudo($pseudo)){
             $errors['pseudo'] = "Ce pseudo est déjà pris";
         }
 
-        if($this->inscription->findByEmail($email)){
+        if($this->inscriptionAdmin->findByEmail($email)){
             $errors['email'] = "Cet email est déjà utilisé pour un autre compte";
         }
 
@@ -43,13 +42,13 @@ class Inscriptions extends Controller{
         if(!empty($errors)){
             $_SESSION['errors'] = $errors;
             $_SESSION['inputs'] = $_POST;
-            header('Location: inscription');
+            header('Location: index.php?p=inscriptionAdmins');
         }else{
             $password = hash('sha256', $password);
-            $this->inscription->insert($pseudo, $email, $password);
+            $this->inscriptionAdmin->insert($pseudo, $email, $password);
             $_SESSION['success'] = 1;
             $_SESSION['pseudo'] = $pseudo;
-            header('Location: index.php?p=accueils');
+            header('Location: index.php?p=ajoutMots');
         }
     }
 }

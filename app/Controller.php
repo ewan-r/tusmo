@@ -1,7 +1,7 @@
 <?php
 abstract class Controller{
     public function loadModel (string $model){
-        $this->$model = new $model();//instancier le modèle $model
+        $this->$model = new $model();
     }
 
     public function render($vue, array $data=[]){
@@ -16,7 +16,7 @@ abstract class Controller{
         $content = ob_get_clean();
 
         //On fabrique le template
-        require_once ('C:\\xampp\htdocs\\tusmo\vues\\layout/default.php');
+        require_once ('C:\\xampp\htdocs\\tusmo\vues\\layout\default.php');
     }
 }
 ?>

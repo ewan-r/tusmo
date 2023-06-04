@@ -1,12 +1,9 @@
 <?php
-require_once 'app/Model.php';
-require_once 'app/Controller.php';
-// define('ROOT', 'var/www/html/projet_web/');
-// echo ROOT;
+require_once "app\Model.php";
+require_once 'app\Controller.php';
 
 
 $params = explode('/', $_GET['p']);
-//var_dump($_GET['p']);die();
 
 if ($params[0] != ""){
     $controller = ucfirst($params[0]);
@@ -21,10 +18,7 @@ if ($params[0] != ""){
         http_response_code(404);
         echo "La page demandée n'existe pas";
     }
-    // echo "<h1>controller 
-    // = $controller</h1>";
-    // $action = (isset($params[1])) ? $params[1] : 'index';
-    // echo "<h1>action = $action</h1>";
+
 } else{
     echo'failed';
     
