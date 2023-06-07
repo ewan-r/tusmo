@@ -21,7 +21,8 @@ class Inscription extends Model{
     }
 
     public function insert(string $pseudo, string $email, string $password){
-        $sql = "INSERT INTO {$this->table} (pseudo, email, password) VALUES ('" . $pseudo . "', '" . $email . "', '" . $password . "')";
+        $mdp = hash('sha256', $password);
+        $sql = "INSERT INTO {$this->table} (pseudo, email, password) VALUES ('" . $pseudo . "', '" . $email . "', '" . $mdp . "')";
         $query = $this->_connexion->prepare($sql);
         $query->execute();
     }

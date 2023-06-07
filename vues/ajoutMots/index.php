@@ -1,4 +1,8 @@
 <?php
+session_start();
+if($_SESSION['type'] != 'admin'){
+    header("Location: index.php?p=accueils");
+}
 if (isset($_POST['mot'])){
     $ajoutMots = new AjoutMots();
     $ajoutMots->ajoutMots_post($_POST['mot']);

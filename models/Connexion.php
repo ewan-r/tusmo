@@ -5,7 +5,7 @@ class Connexion extends Model{
        $this->getConnection();
     }
 
-    public function findByPassword(string $Password){
+    public function findByPassword(string $password){
         $sql = "SELECT * FROM {$this->table} WHERE password = '" . $password . "'";
         $query = $this->_connexion->prepare($sql);
         $query->execute();
@@ -18,4 +18,12 @@ class Connexion extends Model{
         $query->execute();
         return $query->fetch();
     }
+
+    public function findPseudo (string $pseudo){
+        $sql = "SELECT pseudo FROM {$this->table} WHERE pseudo = '" . $pseudo . "'";
+        $query = $this->_connexion->prepare($sql);
+        $query->execute();
+        return $query->fetch();
+    }
+
 }

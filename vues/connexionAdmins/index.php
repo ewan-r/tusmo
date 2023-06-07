@@ -8,13 +8,14 @@ if (isset($_SESSION['errors'])){
     echo '</ul>';
 }
 if (isset($_POST['pseudo'])&& isset($_POST['password'])){
-    $connexions= new Connexions();
-    $connexions->connexion_post();
+    $connexions= new ConnexionAdmins();
+    if($connexions->connexion_post()) header("Location: index.php?p=ajoutMots");
+    else header("Location: index.php?p=connexionAdmins");
 }
 ?>
 
 <h1> Connexion </h1>
-<form action="index.php?p=connexions" method="post">
+<form action="index.php?p=connexionAdmins" method="post">
     <label for="pseudo">Pseudo</label>
     <input type="text" name="pseudo" id="pseudo" required>
     <br>

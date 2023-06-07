@@ -9,7 +9,8 @@ if (isset($_SESSION['errors'])){
 }
 if (isset($_POST['pseudo'])&& isset($_POST['password'])){
     $connexions= new Connexions();
-    $connexions->connexion_post();
+    if($connexions->connexion_post()) header("Location: index.php?p=mots");
+    else header("Location: index.php?p=connexions");
 }
 ?>
 

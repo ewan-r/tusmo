@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once 'controllers/Users.php';
+if($_SESSION['type'] != 'normal') header("Location: index.php?p=accueils");
 if(!isset($_SESSION['success'])){
     header("Location: index.php?p=accueils");
 }
@@ -35,7 +36,7 @@ if (isset($_POST['letter0_'.$_SESSION['essai']])) {
     }
     $mot = "";
     for($i = 0;$i<strlen($word);$i++){
-        $mot .= $_SESSION['letter'.$i.'_'.$_SESSION['essai']-1];
+        $mot .= $_SESSION['letter'.$i.'_'.($_SESSION['essai']-1)];
     }
     if($mot == $word){
         $user = new Users();

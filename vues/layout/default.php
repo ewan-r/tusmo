@@ -13,14 +13,21 @@
     <div class=bandeau>
         <nav>
             <ul>
-                <li><a href="index.php?p=accueils">Accueil</a></li>
-                <li><a href="index.php?p=mots">Mots</a></li>
                 <?php if(isset($_SESSION['success'])){
-                    echo "<li><a href='index.php?p=profils'>Profil</a></li>";
-                    echo "<li><a href='index.php?p=deconnexions'>Déconnexion</a></li>";
+                    if($_SESSION['type'] == 'admin'){
+                        echo "<li><a href='index.php?p=ajoutMots'>Ajout de mots</a></li>";
+                        echo "<li><a href='index.php?p=deconnexions'>Déconnexion</a></li>";
+                    }
+                    else{  
+                        echo "<li><a href='index.php?p=accueils'>Accueil</a></li>";
+                        echo "<li><a href='index.php?p=mots'>Mots</a></li>";
+                        echo "<li><a href='index.php?p=profils'>Profil</a></li>";
+                        echo "<li><a href='index.php?p=deconnexions'>Déconnexion</a></li>";
+                    }
                 }
                 else{
                     echo "<li><a href='index.php?p=connexions'>Connexion</a></li>";
+                    echo "<li><a href='index.php?p=inscriptions'>Inscription</a></li>";
                 }?>
             </ul>
         </nav>

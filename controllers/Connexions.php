@@ -32,16 +32,32 @@ class Connexions extends Controller{
             header('Location: connexion');
         }else{
             $password = hash('sha256', $password);
-            if($this->connexions->findByPseudo($pseudo)){
-                $errors['pseudo'] = "Ce pseudo n'existe pas";
+            if(!$this->connexions->findPseudo($pseudo)){
+                echo "Pseudo incorrect";
+                return false;
             }
-    
-            if($this->connexions->findByPassword($password)){
-                $errors['password'] = "Ce mot de passe n'existe pas";
+
+            if(!$this->comparePassword($pseudo, $password)){
+                echo 'Mot de passe incorrect';
+                return false;
             }
+
             $_SESSION['success'] = 1;
+            $_SESSION['type'] = 'normal';
             $_SESSION['pseudo'] = $pseudo;
-            header("Location: index.php?p=mots");
+            $_SESSION['essai'] = 0;
+            return true;
         }
+    }
+
+    public function comparePassword (string $pseudo, string $mdp){
+        $password = hash('sha256', $mdp);
+        $user = $this->connexions->findByPseudo($pseudo);
+        if($user){
+            if($user['password'] == $password){
+                return true;
+            }
+        }
+        return false;
     }
 }
