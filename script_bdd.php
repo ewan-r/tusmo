@@ -10,7 +10,7 @@ try {
     catch(PDOException $e){
         $stmt = $dbh->prepare("CREATE table user (
             id int not null auto_increment,
-            name varchar(255) not null,
+            pseudo varchar(255) not null,
             email varchar(255) not null,
             password varchar(255) not null,
             level int not null,
@@ -26,7 +26,7 @@ try {
     catch(PDOException $e){
         $stmt = $dbh->prepare("create table admin(
             id int not null auto_increment,
-            name varchar(255) not null,
+            pseudo varchar(255) not null,
             email varchar(255) not null,
             password varchar(255) not null,
             primary key (id)
@@ -56,7 +56,7 @@ try {
         $dbh = new PDO('mysql:host=localhost;dbname=tusmo', $user, $pass);
         $stmt = $dbh->prepare("CREATE table user (
             id int not null auto_increment,
-            name varchar(255) not null,
+            pseudo varchar(255) not null,
             email varchar(255) not null,
             password varchar(255) not null,
             level int not null,
@@ -65,7 +65,7 @@ try {
         $stmt->execute();
         $stmt = $dbh->prepare("create table admin(
             id int not null auto_increment,
-            name varchar(255) not null,
+            pseudo varchar(255) not null,
             email varchar(255) not null,
             password varchar(255) not null,
             primary key (id)
