@@ -11,7 +11,7 @@ if (isset($_POST['letter0_'.$_SESSION['essai']])) {
     for($i=$_SESSION['essai']-1;$i<$_SESSION['essai'];$i++){
         for($j = 0; $j < strlen($word); $j++){
             if(strlen($_POST['letter'.$j.'_'.$i]) == 1){
-                $_SESSION['letter'.$j.'_'.$i] = $_POST['letter'.$j.'_'.$i];
+                $_SESSION['letter'.$j.'_'.$i] = htmlspecialchars($_POST['letter'.$j.'_'.$i]);
             }
             else{
                 header("Location: index.php?p=mots");
