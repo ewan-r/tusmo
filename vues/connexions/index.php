@@ -1,16 +1,27 @@
 <?php 
 session_start();
-if (isset($_SESSION['errors'])){
-    echo '<ul>';
-    foreach($_SESSION['errors'] as $error){
-        echo '<li>' . $error . '</li>';
-    }
-    echo '</ul>';
-}
+
 if (isset($_POST['pseudo'])&& isset($_POST['password'])){
-    $connexions= new Connexions();
-    if($connexions->connexion_post()) header("Location: index.php?p=mots");
-    else header("Location: index.php?p=connexions");
+    if(!isset($_SESSION['bruteforce'])) $_SESSION['bruteforce'] = 0;
+    if($_SESSION['bruteforce'] < 3){
+        $connexions= new Connexions();
+        if($connexions->connexion_post()) header("Location: index.php?p=mots");
+        else {
+            $_SESSION['bruteforce']++;
+            echo 'Mauvais identifiants';
+        }
+        if (isset($_SESSION['errors'])){
+            echo '<ul>';
+            foreach($_SESSION['errors'] as $error){
+                echo '<li>' . $error . '</li>';
+            }
+            echo '</ul>';
+        }
+    }else{
+        echo 'Vous avez été bloqué pour 1 minute';
+        sleep(60);
+        $_SESSION['bruteforce'] = 0;
+    }
 }
 ?>
 

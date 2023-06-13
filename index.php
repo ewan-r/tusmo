@@ -8,7 +8,7 @@ $params = explode('/', $_GET['p']);
 if ($params[0] != ""){
     $controller = ucfirst($params[0]);
     $action = (isset($params[1])) ? $params[1] : 'index'; 
-    require_once ('controllers/' . $controller . '.php');
+    require_once ('controllers\\' . $controller . '.php');
     $controller = new $controller();
     if (method_exists($controller, $action)){
         unset($params[0]);

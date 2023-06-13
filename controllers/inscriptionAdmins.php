@@ -16,10 +16,10 @@ class InscriptionAdmins extends Controller{
     }
 
     public function inscription_post(){
-        $pseudo = $_POST['pseudo'];
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-        $password_confirm = $_POST['password_confirm'];
+        $pseudo = htmlspecialchar($_POST['pseudo']);
+        $email = htmlspecialchar($_POST['email']);
+        $password = htmlspecialchar($_POST['password']);
+        $password_confirm = htmlspecialchar($_POST['password_confirm']);
 
         $errors = [];
 

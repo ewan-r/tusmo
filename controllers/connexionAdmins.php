@@ -17,8 +17,8 @@ class ConnexionAdmins extends Controller{
     }
 
     public function connexion_post(){
-        $pseudo = $_POST['pseudo'];
-        $password = $_POST['password'];
+        $pseudo = htmlspecialchar($_POST['pseudo']);
+        $password = htmlspecialchar($_POST['password']);
 
         $errors = [];
 

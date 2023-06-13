@@ -1,16 +1,26 @@
 <?php 
 session_start();
-if (isset($_SESSION['errors'])){
-    echo '<ul>';
-    foreach($_SESSION['errors'] as $error){
-        echo '<li>' . $error . '</li>';
-    }
-    echo '</ul>';
-}
 if (isset($_POST['pseudo'])&& isset($_POST['password'])){
-    $connexions= new ConnexionAdmins();
-    if($connexions->connexion_post()) header("Location: index.php?p=ajoutMots");
-    else header("Location: index.php?p=connexionAdmins");
+    if(!isset($_SESSION['bruteforceConAdmin'])) $_SESSION['bruteforceConAdmin'] = 0;
+    if($_SESSION['bruteforceConAdmin'] < 3){
+        $connexions= new ConnexionAdmins();
+        if($connexions->connexion_post()) header("Location: index.php?p=ajoutMots");
+        else {
+            if (isset($_SESSION['errors'])){
+                echo '<ul>';
+                foreach($_SESSION['errors'] as $error){
+                    echo '<li>' . $error . '</li>';
+                }
+                echo '</ul>';
+            }
+            $_SESSION['bruteforceConAdmin']++;
+            echo 'Mauvais identifiants';
+        }
+    }else{
+        echo 'Vous avez été bloqué pour 1 minute';
+        sleep(60);
+        $_SESSION['bruteforceConAdmin'] = 0;
+    }
 }
 ?>
 

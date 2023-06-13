@@ -11,12 +11,12 @@ abstract class Controller{
         //On démarre le buffer de sortie
         ob_start();
         //On génère la vue
-        require_once ('C:\\xampp\htdocs\\tusmo\vues\\' . strtolower(get_class($this)) . '\\' . $vue . '.php');
+        require_once ("vues/" . strtolower(get_class($this)) . "/" . $vue . '.php');
         //On stock le contenu dans $content
         $content = ob_get_clean();
 
         //On fabrique le template
-        require_once ('C:\\xampp\htdocs\\tusmo\vues\\layout\default.php');
+        require_once ("vues/layout/default.php");
     }
 }
 ?>

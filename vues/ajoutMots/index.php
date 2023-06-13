@@ -5,7 +5,7 @@ if($_SESSION['type'] != 'admin'){
 }
 if (isset($_POST['mot'])){
     $ajoutMots = new AjoutMots();
-    $ajoutMots->ajoutMots_post($_POST['mot']);
+    $ajoutMots->ajoutMots_post(htmlspecialchar($_POST['mot']));
 }
 ?>
 

@@ -1,4 +1,7 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['verif'])&&!$_SESSION['verif']) header("Location: index.php?p=verifAdmins");
+
     if (isset($_SESSION['errors'])){
         echo '<ul>';
         foreach($_SESSION['errors'] as $error){
@@ -8,6 +11,7 @@
     }
     if (isset($_POST['pseudo'])&& isset($_POST['email'])&& isset($_POST['password'])&& isset($_POST['password_confirm'])){
         $inscriptions= new InscriptionAdmins();
+        $_SESSION['verif'] = false;
         $inscriptions->inscription_post();
     }
 

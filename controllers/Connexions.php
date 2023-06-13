@@ -17,8 +17,8 @@ class Connexions extends Controller{
     }
 
     public function connexion_post(){
-        $pseudo = $_POST['pseudo'];
-        $password = $_POST['password'];
+        $pseudo = htmlspecialchars($_POST['pseudo']);
+        $password = htmlspecialchars($_POST['password']);
 
         $errors = [];
 
@@ -29,7 +29,6 @@ class Connexions extends Controller{
         if(!empty($errors)){
             $_SESSION['errors'] = $errors;
             $_SESSION['inputs'] = $_POST;
-            header('Location: connexion');
         }else{
             $password = hash('sha256', $password);
             if(!$this->connexions->findPseudo($pseudo)){
